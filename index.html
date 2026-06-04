@@ -16,9 +16,9 @@
         }
     </style>
 </head>
-<body class="bg-gradient-to-br from-indigo-50 to-blue-100 min-h-screen flex items-center justify-center p-4 sm:p-6">
+<body class="bg-gradient-to-br from-indigo-50 to-blue-100 min-h-screen flex flex-col items-center justify-center p-4 sm:p-6">
 
-    <div class="bg-white w-full max-w-lg rounded-2xl shadow-xl overflow-hidden border border-slate-100 transition-all duration-300 hover:shadow-2xl">
+    <div class="bg-white w-full max-w-lg rounded-2xl shadow-xl overflow-hidden border border-slate-100 transition-all duration-300 hover:shadow-2xl mb-4">
         
         <div class="bg-gradient-to-r from-blue-600 to-indigo-700 p-6 text-white text-center relative">
             <div class="absolute top-4 left-4 bg-white/20 px-3 py-1 rounded-full text-xs font-light backdrop-blur-sm">
@@ -120,14 +120,17 @@
         </div>
     </div>
 
+    <div class="text-center text-slate-500 text-sm mt-2 font-medium">
+        พัฒนาระบบโดย: <span class="text-blue-600 font-semibold">นางสาวศิริกาญจน์ วรรณา</span><br>
+        <span class="text-xs text-slate-400">โรงเรียนศรีสะเกษวิทยาลัย ม.6</span>
+    </div>
+
     <script>
-        // เติมลิงก์สคริปต์ของ Google Apps Script ที่นี่ตามที่ระบุในเงื่อนไข
         const SCRIPT_URL = "https://script.google.com/macros/s/AKfycby-gZ_FxBli4TAuxG_HyIcrQcHg9hA7OLXyB6IwbLXzlu87V1FQbpWyNNueGD7c5qTk/exec";
 
         document.getElementById('phoneForm').addEventListener('submit', async function(e) {
             e.preventDefault();
 
-            // ตรวจสอบการกรอก URL ของสคริปต์เบื้องต้น
             if (SCRIPT_URL === "วาง_URL_ของ_GOOGLE_APPS_SCRIPT_ที่นี่" || SCRIPT_URL.trim() === "") {
                 Swal.fire({
                     icon: 'warning',
@@ -138,7 +141,6 @@
                 return;
             }
 
-            // แสดงหน้าจอรอโหลดตอนบันทึกข้อมูล
             Swal.fire({
                 title: 'กำลังบันทึกข้อมูล...',
                 text: 'กรุณารอสักครู่ ระบบกำลังส่งข้อมูลไปยัง Google Sheets',
@@ -148,24 +150,21 @@
                 }
             });
 
-            // ดึงค่าปัจจุบันเพื่อสร้างวัน-เวลาไทย (คอลัมน์ A)
             const now = new Date();
             const thaiDateTime = now.toLocaleDateString('th-TH', {
                 year: 'numeric', month: '2-digit', day: '2-digit'
             }) + ' ' + now.toLocaleTimeString('th-TH', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
 
-            // ดึงค่าต่างๆ จาก Form เพื่อสร้าง Object ข้อมูลตามไฟล์แนบ
             const payload = {
-                timestamp: thaiDateTime, // คอลัมน์ A: วัน-เวลา
-                type: document.querySelector('input[name="type"]:checked').value, // คอลัมน์ B: ประเภทรายการ
-                serialNumber: document.getElementById('serialNumber').value.trim(), // คอลัมน์ C: Serial Number
-                borrowerName: document.getElementById('borrowerName').value.trim(), // คอลัมน์ D: ชื่อผู้เบิก
-                phoneModel: document.getElementById('phoneModel').value.trim(), // คอลัมน์ E: รุ่นโทรศัพท์
-                note: document.getElementById('note').value.trim() // คอลัมน์ F: หมายเหตุ
+                timestamp: thaiDateTime, 
+                type: document.querySelector('input[name="type"]:checked').value, 
+                serialNumber: document.getElementById('serialNumber').value.trim(), 
+                borrowerName: document.getElementById('borrowerName').value.trim(), 
+                phoneModel: document.getElementById('phoneModel').value.trim(), 
+                note: document.getElementById('note').value.trim() 
             };
 
             try {
-                // ส่งข้อมูลไปยัง Google Apps Script โดยใช้ text/plain เพื่อป้องกันปัญหา CORS Preflight
                 const response = await fetch(SCRIPT_URL, {
                     method: 'POST',
                     mode: 'cors',
@@ -185,7 +184,7 @@
                         confirmButtonColor: '#16a34a',
                         timer: 2000
                     });
-                    // ล้างข้อมูลในฟอร์ม (ยกเว้นประเภทรายการ)
+                    
                     document.getElementById('serialNumber').value = '';
                     document.getElementById('borrowerName').value = '';
                     document.getElementById('phoneModel').value = '';

@@ -1,208 +1,52 @@
 <!DOCTYPE html>
 <html lang="th">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ระบบเบิก-คืนโทรศัพท์ของนักเรียน</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <style>
-        body {
-            font-family: 'Kanit', sans-serif;
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Phone Tracking System</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+body{font-family:'Kanit',sans-serif;background:#020617;}
+.glow{box-shadow:0 0 30px rgba(34,211,238,.25);}
+</style>
 </head>
-<body class="bg-gradient-to-br from-indigo-50 to-blue-100 min-h-screen flex flex-col items-center justify-center p-4 sm:p-6">
+<body class="min-h-screen flex flex-col items-center justify-center p-4">
+<div class="fixed inset-0 overflow-hidden">
+<div class="absolute top-0 left-0 w-96 h-96 bg-cyan-500/20 blur-3xl rounded-full"></div>
+<div class="absolute bottom-0 right-0 w-96 h-96 bg-violet-500/20 blur-3xl rounded-full"></div>
+</div>
 
-    <div class="bg-white w-full max-w-lg rounded-2xl shadow-xl overflow-hidden border border-slate-100 transition-all duration-300 hover:shadow-2xl mb-4">
-        
-        <div class="bg-gradient-to-r from-blue-600 to-indigo-700 p-6 text-white text-center relative">
-            <div class="absolute top-4 left-4 bg-white/20 px-3 py-1 rounded-full text-xs font-light backdrop-blur-sm">
-                <i class="fa-solid fa-mobile-screen-button mr-1"></i> Phone Tracker
-            </div>
-            <div class="w-16 h-16 bg-white/10 rounded-full flex items-center justify-center mx-auto mb-3 backdrop-blur-md border border-white/20 shadow-inner">
-                <i class="fa-solid fa-clipboard-list text-3xl text-white"></i>
-            </div>
-            <h1 class="text-2xl font-bold tracking-wide">ระบบเบิก/คืนโทรศัพท์ของนักเรียน</h1>
-            <p class="text-blue-100 text-sm font-light mt-1">บันทึกข้อมูลการเข้า-ออกของอุปกรณ์อย่างง่ายและรวดเร็ว</p>
-        </div>
+<div class="relative w-full max-w-xl bg-white/10 backdrop-blur-xl border border-cyan-400/30 rounded-3xl glow overflow-hidden">
+<div class="bg-gradient-to-r from-cyan-500 via-blue-600 to-violet-600 p-8 text-center text-white">
+<i class="fa-solid fa-microchip text-5xl mb-3"></i>
+<h1 class="text-3xl font-bold">AI PHONE TRACKING SYSTEM</h1>
+<p class="opacity-90">ระบบเบิก-คืนโทรศัพท์อัจฉริยะ</p>
+</div>
 
-        <form id="phoneForm" class="p-6 sm:p-8 space-y-6">
-            
-            <div>
-                <label class="block text-slate-700 text-sm font-semibold mb-3">
-                    <i class="fa-solid fa-layer-group text-blue-600 mr-1"></i> ประเภทรายการ <span class="text-red-500">*</span>
-                </label>
-                <div class="grid grid-cols-2 gap-4">
-                    <label class="relative flex flex-col items-center justify-center p-4 border-2 rounded-xl cursor-pointer transition-all duration-200 group bg-slate-50 border-slate-200 hover:bg-amber-50/50 has-[:checked]:border-amber-500 has-[:checked]:bg-amber-50/70">
-                        <input type="radio" name="type" value="เบิก" class="sr-only peer" checked>
-                        <div class="w-10 h-10 rounded-full bg-amber-100 flex items-center justify-center text-amber-600 mb-2 peer-checked:bg-amber-500 peer-checked:text-white transition-all">
-                            <i class="fa-solid fa-arrow-up-from-bracket text-lg"></i>
-                        </div>
-                        <span class="text-sm font-medium text-slate-600 peer-checked:text-amber-700">เบิกอุปกรณ์</span>
-                        <div class="absolute top-2 right-2 w-4 h-4 rounded-full border border-slate-300 flex items-center justify-center peer-checked:border-amber-500 peer-checked:bg-amber-500 after:content-[''] after:w-1.5 after:h-1.5 after:bg-white after:rounded-full after:hidden peer-checked:after:block"></div>
-                    </label>
+<form class="p-6 space-y-4">
+<input class="w-full p-3 rounded-xl bg-slate-900/60 text-white border border-cyan-500/30" placeholder="Serial Number">
+<input class="w-full p-3 rounded-xl bg-slate-900/60 text-white border border-cyan-500/30" placeholder="ชื่อผู้เบิก">
+<input class="w-full p-3 rounded-xl bg-slate-900/60 text-white border border-cyan-500/30" placeholder="รุ่นโทรศัพท์">
+<textarea class="w-full p-3 rounded-xl bg-slate-900/60 text-white border border-cyan-500/30" rows="3" placeholder="หมายเหตุ"></textarea>
 
-                    <label class="relative flex flex-col items-center justify-center p-4 border-2 rounded-xl cursor-pointer transition-all duration-200 group bg-slate-50 border-slate-200 hover:bg-emerald-50/50 has-[:checked]:border-emerald-500 has-[:checked]:bg-emerald-50/70">
-                        <input type="radio" name="type" value="คืน" class="sr-only peer">
-                        <div class="w-10 h-10 rounded-full bg-emerald-100 flex items-center justify-center text-emerald-600 mb-2 peer-checked:bg-emerald-500 peer-checked:text-white transition-all">
-                            <i class="fa-solid fa-arrow-down-left-and-arrow-up-right-to-center text-lg"></i>
-                        </div>
-                        <span class="text-sm font-medium text-slate-600 peer-checked:text-emerald-700">คืนอุปกรณ์</span>
-                        <div class="absolute top-2 right-2 w-4 h-4 rounded-full border border-slate-300 flex items-center justify-center peer-checked:border-emerald-500 peer-checked:bg-emerald-500 after:content-[''] after:w-1.5 after:h-1.5 after:bg-white after:rounded-full after:hidden peer-checked:after:block"></div>
-                    </label>
-                </div>
-            </div>
+<button class="w-full p-4 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-bold">
+บันทึกข้อมูล
+</button>
+</form>
 
-            <div>
-                <label for="serialNumber" class="block text-slate-700 text-sm font-semibold mb-2">
-                    <i class="fa-solid fa-barcode text-blue-600 mr-1"></i> Serial Number <span class="text-red-500">*</span>
-                </label>
-                <div class="relative">
-                    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-slate-400">
-                        <i class="fa-solid fa-hashtag"></i>
-                    </div>
-                    <input type="text" id="serialNumber" required
-                        class="w-full pl-10 pr-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent focus:bg-white transition-all text-slate-800 placeholder-slate-400 text-sm"
-                        placeholder="กรอกเลขซีเรียล หรือรหัสประจำเครื่อง">
-                </div>
-            </div>
+<div class="text-center text-cyan-200 text-sm p-4 border-t border-cyan-400/20">
+ระบบจัดเก็บข้อมูลแบบ Real-time เชื่อมต่อ Google Sheets
+</div>
+</div>
 
-            <div>
-                <label for="borrowerName" class="block text-slate-700 text-sm font-semibold mb-2">
-                    <i class="fa-solid fa-user text-blue-600 mr-1"></i> ชื่อผู้เบิก <span class="text-red-500">*</span>
-                </label>
-                <div class="relative">
-                    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-slate-400">
-                        <i class="fa-solid fa-id-card"></i>
-                    </div>
-                    <input type="text" id="borrowerName" required
-                        class="w-full pl-10 pr-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent focus:bg-white transition-all text-slate-800 placeholder-slate-400 text-sm"
-                        placeholder="ระบุชื่อ-นามสกุล ของนักเรียนหรือผู้เบิก">
-                </div>
-            </div>
-
-            <div>
-                <label for="phoneModel" class="block text-slate-700 text-sm font-semibold mb-2">
-                    <i class="fa-solid fa-mobile text-blue-600 mr-1"></i> รุ่นโทรศัพท์ <span class="text-red-500">*</span>
-                </label>
-                <div class="relative">
-                    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-slate-400">
-                        <i class="fa-solid fa-gears"></i>
-                    </div>
-                    <input type="text" id="phoneModel" required
-                        class="w-full pl-10 pr-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent focus:bg-white transition-all text-slate-800 placeholder-slate-400 text-sm"
-                        placeholder="เช่น iPhone 14 Pro, Samsung Galaxy S23">
-                </div>
-            </div>
-
-            <div>
-                <label for="note" class="block text-slate-700 text-sm font-semibold mb-2">
-                    <i class="fa-solid fa-comment-dots text-blue-600 mr-1"></i> หมายเหตุ
-                </label>
-                <textarea id="note" rows="3"
-                    class="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent focus:bg-white transition-all text-slate-800 placeholder-slate-400 text-sm resize-none"
-                    placeholder="ระบุรายละเอียดเพิ่มเติม (หากมี)"></textarea>
-            </div>
-
-            <button type="submit"
-                class="w-full bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white font-medium py-3 px-4 rounded-xl shadow-lg hover:shadow-xl active:scale-[0.98] transition-all duration-150 flex items-center justify-center cursor-pointer">
-                <i class="fa-solid fa-paper-plane mr-2"></i> บันทึกข้อมูลเข้าระบบ
-            </button>
-        </form>
-
-        <div class="bg-slate-50 px-6 py-4 border-t border-slate-100 text-center text-xs text-slate-400">
-            ระบบจัดเก็บข้อมูลแบบ Real-time เชื่อมต่อ Google Sheets
-        </div>
-    </div>
-
-    <div class="text-center text-slate-500 text-sm mt-2 font-medium">
-        พัฒนาระบบโดย: <span class="text-blue-600 font-semibold">นางสาวศิริกาญจน์ วรรณา</span><br>
-        <span class="text-xs text-slate-400">โรงเรียนศรีสะเกษวิทยาลัย ม.6</span>
-    </div>
-
-    <script>
-        const SCRIPT_URL = "https://script.google.com/macros/s/AKfycby-gZ_FxBli4TAuxG_HyIcrQcHg9hA7OLXyB6IwbLXzlu87V1FQbpWyNNueGD7c5qTk/exec";
-
-        document.getElementById('phoneForm').addEventListener('submit', async function(e) {
-            e.preventDefault();
-
-            if (SCRIPT_URL === "วาง_URL_ของ_GOOGLE_APPS_SCRIPT_ที่นี่" || SCRIPT_URL.trim() === "") {
-                Swal.fire({
-                    icon: 'warning',
-                    title: 'ยังไม่ได้ตั้งค่าระบบหลังบ้าน!',
-                    text: 'กรุณานำ URL ของ Google Apps Script มาวางแทนที่ตัวแปร SCRIPT_URL ในโค้ดก่อนใช้งานครับ',
-                    confirmButtonColor: '#ea580c'
-                });
-                return;
-            }
-
-            Swal.fire({
-                title: 'กำลังบันทึกข้อมูล...',
-                text: 'กรุณารอสักครู่ ระบบกำลังส่งข้อมูลไปยัง Google Sheets',
-                allowOutsideClick: false,
-                didOpen: () => {
-                    Swal.showLoading();
-                }
-            });
-
-            const now = new Date();
-            const thaiDateTime = now.toLocaleDateString('th-TH', {
-                year: 'numeric', month: '2-digit', day: '2-digit'
-            }) + ' ' + now.toLocaleTimeString('th-TH', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
-
-            const payload = {
-                timestamp: thaiDateTime, 
-                type: document.querySelector('input[name="type"]:checked').value, 
-                serialNumber: document.getElementById('serialNumber').value.trim(), 
-                borrowerName: document.getElementById('borrowerName').value.trim(), 
-                phoneModel: document.getElementById('phoneModel').value.trim(), 
-                note: document.getElementById('note').value.trim() 
-            };
-
-            try {
-                const response = await fetch(SCRIPT_URL, {
-                    method: 'POST',
-                    mode: 'cors',
-                    headers: {
-                        'Content-Type': 'text/plain;charset=utf-8'
-                    },
-                    body: JSON.stringify(payload)
-                });
-
-                const result = await response.json();
-
-                if (result.status === 'success') {
-                    Swal.fire({
-                        icon: 'success',
-                        title: 'บันทึกสำเร็จ!',
-                        text: 'ระบบได้เก็บข้อมูลลง Google Sheets เรียบร้อยแล้ว',
-                        confirmButtonColor: '#16a34a',
-                        timer: 2000
-                    });
-                    
-                    document.getElementById('serialNumber').value = '';
-                    document.getElementById('borrowerName').value = '';
-                    document.getElementById('phoneModel').value = '';
-                    document.getElementById('note').value = '';
-                } else {
-                    throw new Error(result.message || 'เกิดข้อผิดพลาดในการตอบกลับ');
-                }
-
-            } catch (error) {
-                console.error('Error:', error);
-                Swal.fire({
-                    icon: 'error',
-                    title: 'เกิดข้อผิดพลาด!',
-                    text: 'ไม่สามารถส่งข้อมูลได้ กรุณาตรวจเช็คการ Deployment Web App หรือสิทธิ์เข้าใช้งาน',
-                    confirmButtonColor: '#dc2626'
-                });
-            }
-        });
-    </script>
+<div class="mt-6 text-center text-white">
+<div class="inline-block px-6 py-4 rounded-2xl bg-white/10 backdrop-blur-md border border-cyan-400/30">
+<div class="text-cyan-300 text-sm">Developed By</div>
+<div class="font-bold text-lg">นางสาวศิริกาญจน์ วรรณา</div>
+<div class="text-cyan-200 text-sm">โรงเรียนศรีสะเกษวิทยาลัย ม.6</div>
+</div>
+</div>
 </body>
 </html>
